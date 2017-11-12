@@ -27,10 +27,14 @@ public class Flight {
         this.arrivalCity = arrivalCity;
         this.arrivalTime = arrivalTime;
     }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false, unique = true)
+    public int getId() {
+        return id;
+    }
+
+    @Column(name = "flight_number", nullable = false)
     public int getFlightNumber() {
         return flightNumber;
     }
