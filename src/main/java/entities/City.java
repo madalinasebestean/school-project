@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="Users")
 public class City {
+    // LOL
 
     private int id;
     private String name;
