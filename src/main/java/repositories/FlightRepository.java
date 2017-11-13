@@ -1,4 +1,7 @@
-package User;
+package repositories;
+
+import entities.City;
+import entities.Flight;
 
 import java.sql.*;
 
@@ -35,9 +38,9 @@ public class FlightRepository {
             PreparedStatement x = con.prepareStatement("SELECT * FROM flights WHERE id = '" + id + "' ");
             ResultSet result = x.executeQuery();
             flight = new Flight(
-                result.getFlightNumber("flight_number"), result.getAirplaneType("password"),
-                result.getDepartureCity("departure_city_id"), result.getDepartureTime("departure_time"),
-                result.getArrivalCity("arrival_city_id"), result.getArrivalTime("arrival_time")
+                result.getInt("flight_number"), result.getString("airplane"),
+                    (City) result.getObject("departure_city_id"), result.getTimestamp("departure_time"),
+                    (City) result.getObject("arrival_city_id"), result.getTimestamp("arrival_time")
             );
         } catch (Exception e) {
             System.out.println(e);
@@ -52,7 +55,7 @@ public class FlightRepository {
             PreparedStatement posted = con.prepareStatement(
                 "INSERT INTO flights (flight_number, airplane_type, departure_city_id, departure_time, arrival_city_id, arrival_time) VALUES " +
                 "( '" + flight.getFlightNumber() + "', '" + flight.getAirplaneType() + "', '" + flight.getDepartureCity() + "', '" +
-                flight.getDepartureTime() + "', '"f flight.getArrivalCity() + "', '" + flight.getArrivalTime() +
+                flight.getDepartureTime() + "', '" +flight.getArrivalCity() + "', '" + flight.getArrivalTime() +
                 "', '" + "');");
             posted.executeUpdate();
         } catch (Exception e) {
@@ -81,7 +84,7 @@ public class FlightRepository {
     public void deleteFlight(Flight flight){
         try {
             Connection con = this.getConnection();
-            PreparedStatement del = con.prepareStatement("DELETE FROM flights WHERE id = '" + user.getId() + "' ");
+            PreparedStatement del = con.prepareStatement("DELETE FROM flights WHERE id = '" + flight.getId() + "' ");
             del.executeUpdate();
         } catch (Exception e) {
             System.out.println(e);

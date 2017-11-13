@@ -1,4 +1,5 @@
-package User;
+package repositories;
+import entities.User;
 
 import java.sql.*;
 
@@ -12,7 +13,7 @@ public class UserRepository {
     public Connection getConnection() throws Exception {
         try {
             String driver = "com.mysql.cj.jdbc.Driver";
-            String url = "jdbc:mysql://localhost:3306/tema3?autoReconnect=true&useSSL=false";
+            String url = "jdbc:mysql://localhost:3306/proiect?autoReconnect=true&useSSL=false";
             String username = "root";
             String password = "hbtd9xcb";
             Class.forName(driver);
@@ -35,7 +36,7 @@ public class UserRepository {
             PreparedStatement x = con.prepareStatement("SELECT * FROM users WHERE username = '" + username + "' ");
             ResultSet result = x.executeQuery();
             while (result.next()) {
-                user = new User(result.getString("user"), result.getString("password"),
+                user = new User(result.getString("username"), result.getString("password"),
                         result.getString("type"));
             }
         } catch (Exception e) {

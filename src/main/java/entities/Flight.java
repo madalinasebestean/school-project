@@ -15,8 +15,7 @@ public class Flight {
     private City arrivalCity;
     private Timestamp arrivalTime;
 
-    public Flight(int id) {
-        this.id = id;
+    public Flight() {
     }
 
     public Flight(int flightNumber, String airplaneType, City departureCity, Timestamp departureTime, City arrivalCity, Timestamp arrivalTime) {
